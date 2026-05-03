@@ -76,7 +76,7 @@
             padding: 30px;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            max-width: 450px;
+            max-width: 500px;
             width: 90%;
             border: 4px solid #fff;
         }
@@ -93,28 +93,19 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* Applying Animations to Text */
         .ani-h1 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.3s; }
         .ani-name { opacity: 0; animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.8s; }
-        .ani-date { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 1.2s; }
-        .ani-text { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 1.5s; }
-        .ani-timer { opacity: 0; animation: popIn 0.8s ease forwards; animation-delay: 1.8s; }
-        .ani-message { opacity: 0; animation: fadeInUp 1s ease forwards; animation-delay: 2.2s; }
-        .ani-heart { animation: pulse 1.5s infinite; animation-delay: 2.5s; display: inline-block; }
+        .ani-timer { opacity: 0; animation: popIn 0.8s ease forwards; animation-delay: 1.2s; }
+        .ani-message { opacity: 0; animation: fadeInUp 1s ease forwards; animation-delay: 1.8s; }
 
-        h1 { color: #d63384; font-size: 2rem; margin-bottom: 5px; }
-        .name { color: #ff4d6d; font-size: 2.8rem; font-weight: bold; }
-        .start-date { font-size: 1.1rem; color: #777; margin-bottom: 20px; font-weight: bold; }
+        h1 { color: #d63384; font-size: 1.8rem; margin-bottom: 5px; }
+        .name { color: #ff4d6d; font-size: 2.5rem; font-weight: bold; margin-bottom: 10px; }
+        .start-date { font-size: 1rem; color: #777; margin-bottom: 20px; font-weight: bold; }
 
+        /* Timer Grid Update (3 columns for better mobile view) */
         .timer-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin: 20px 0;
         }
@@ -123,67 +114,64 @@
             background: #ff4d6d;
             color: white;
             padding: 10px 5px;
-            border-radius: 15px;
+            border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .timer-box span { display: block; font-size: 1.4rem; font-weight: bold; }
+        .timer-box span { display: block; font-size: 1.3rem; font-weight: bold; }
+        .timer-label { font-size: 0.8rem; opacity: 0.9; }
 
         .message {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.7;
             color: #444;
             margin-top: 20px;
-            padding: 0 10px;
         }
 
-        .footer-heart { color: #ff4d6d; font-size: 40px; margin-top: 15px; }
+        .footer-heart { color: #ff4d6d; font-size: 40px; margin-top: 15px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
     </style>
 </head>
 <body>
 
-<!-- ပထမဆုံးပြမည့် လက်ဆောင် Screen -->
 <div id="gift-screen">
     <div class="gift-box" onclick="showMainContent()">🎁</div>
     <p style="color: white; font-size: 1.2rem; margin-top: 15px;">ကောက်စိန်လေးအတွက် လက်ဆောင်ရှိတယ်နော်...</p>
     <button class="open-btn" onclick="showMainContent()">ဖွင့်ကြည့်မယ်</button>
 </div>
 
-<!-- Main Website Content -->
 <div id="main-content">
     <div class="container">
         <h1 class="ani-h1">Happy Anniversary</h1>
         <div class="name ani-name">ကောက်စိန်</div>
-        <div class="start-date ani-date">🗓️ ၂၀၂၆၊ မေလ (၁) ရက်</div>
+        <div class="start-date">🗓️ စတင်သည့်ရက် - ၂၀၂၆၊ မေလ (၁) ရက်</div>
 
-        <p class="ani-text">အကိုတို့နှစ်ယောက် လက်တွဲလာခဲ့တာ...</p>
+        <p style="margin-bottom: 10px;">တို့နှစ်ယောက် လက်တွဲလာခဲ့တာ...</p>
 
         <div class="timer-container ani-timer">
-            <div class="timer-box"><span id="days">0</span>ရက်</div>
-            <div class="timer-box"><span id="hours">0</span>နာရီ</div>
-            <div class="timer-box"><span id="minutes">0</span>မိနစ်</div>
-            <div class="timer-box"><span id="seconds">0</span>စက္ကန့်</div>
+            <div class="timer-box"><span id="years">0</span><div class="timer-label">နှစ်</div></div>
+            <div class="timer-box"><span id="months">0</span><div class="timer-label">လ</div></div>
+            <div class="timer-box"><span id="days">0</span><div class="timer-label">ရက်</div></div>
+            <div class="timer-box"><span id="hours">0</span><div class="timer-label">နာရီ</div></div>
+            <div class="timer-box"><span id="minutes">0</span><div class="timer-label">မိနစ်</div></div>
+            <div class="timer-box"><span id="seconds">0</span><div class="timer-label">စက္ကန့်</div></div>
         </div>
 
         <div class="message ani-message">
             "မင်းနဲ့အတူ ဖြတ်သန်းရတဲ့ နေ့ရက်တိုင်းက ကိုယ့်အတွက်တော့ အရမ်းတန်ဖိုးရှိပါတယ်။ ရှေ့ဆက်မယ့် နှစ်ပေါင်းများစွာမှာလည်း အခုလိုပဲ အမြဲတမ်း အတူတူရှိနေပေးပါနော် <br> <b>အရမ်းချစ်တယ်ကောက်စိန်လေးရေ...</b>"
         </div>
-        <div class="footer-heart ani-heart">❤️</div>
+        <div class="footer-heart">❤️</div>
     </div>
 </div>
 
 <script>
-    // စတင်သည့်ရက် (May 1, 2026)
-    const startDate = new Date("May 1, 2026 00:00:00").getTime();
+    const startDate = new Date("May 1, 2026 00:00:00");
 
     function showMainContent() {
         const giftScreen = document.getElementById('gift-screen');
         const mainContent = document.getElementById('main-content');
-        
-        // လက်ဆောင်ဗူး screen ကို အပေါ်သို့ slide လုပ်လိုက်ခြင်း
         giftScreen.style.transform = 'translateY(-100%)';
-        
         setTimeout(() => {
             giftScreen.style.display = 'none';
             mainContent.style.display = 'flex';
@@ -191,17 +179,35 @@
     }
 
     function updateTimer() {
-        const now = new Date().getTime();
-        const difference = now - startDate;
+        const now = new Date();
+        let diffTime = now - startDate;
 
-        // ၂၀၂၆ မေလ ၁ ရက် မတိုင်ခင်ဆိုရင် 0 ပဲပြမယ်
-        if (difference < 0) return;
+        if (diffTime < 0) return;
 
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        // အသေးစိတ်တွက်ချက်မှု (နှစ်၊ လ၊ ရက်)
+        let years = now.getFullYear() - startDate.getFullYear();
+        let months = now.getMonth() - startDate.getMonth();
+        let days = now.getDate() - startDate.getDate();
 
+        if (days < 0) {
+            months -= 1;
+            // ပြီးခဲ့တဲ့လမှာ ရက်ပေါင်းဘယ်လောက်ရှိလဲတွက်တာ
+            let lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+            days += lastMonth.getDate();
+        }
+
+        if (months < 0) {
+            years -= 1;
+            months += 12;
+        }
+
+        // အချိန်ပိုင်းတွက်ချက်မှု
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+        document.getElementById("years").innerText = years;
+        document.getElementById("months").innerText = months;
         document.getElementById("days").innerText = days;
         document.getElementById("hours").innerText = hours;
         document.getElementById("minutes").innerText = minutes;
