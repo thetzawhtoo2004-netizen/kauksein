@@ -11,12 +11,10 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            /* overflow: hidden; ကို ဖယ်လိုက်ပါတယ် */
             background: #ffe5ec;
             font-family: 'Pyidaungsu', sans-serif;
         }
 
-        /* လက်ဆောင်ဗူးပြသမည့် Screen */
         #gift-screen {
             position: fixed;
             top: 0;
@@ -36,7 +34,6 @@
             font-size: 80px;
             cursor: pointer;
             animation: bounce 1.2s infinite;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
         }
 
         @keyframes bounce {
@@ -53,22 +50,19 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
             font-family: 'Pyidaungsu', sans-serif;
         }
 
-        /* Main Content */
         #main-content {
             display: none;
-            min-height: 100vh; /* height အစား min-height ပြောင်းလိုက်ပါပြီ */
+            min-height: 100vh;
             width: 100%;
-            display: none; /* JS ကနေ flex ပြောင်းပေးပါလိမ့်မယ် */
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-            padding: 40px 0; /* အပေါ်အောက် လွတ်အောင် padding ထည့်ထားပါတယ် */
+            padding: 40px 0;
             box-sizing: border-box;
         }
 
@@ -80,7 +74,6 @@
             max-width: 450px;
             width: 90%;
             border: 4px solid #fff;
-            margin: 20px 0;
         }
 
         /* Animations */
@@ -89,20 +82,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            80% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
         .ani-h1 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.3s; }
-        .ani-name { opacity: 0; animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; animation-delay: 0.8s; }
-        .ani-timer { opacity: 0; animation: popIn 0.8s ease forwards; animation-delay: 1.2s; }
+        .ani-name { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.8s; }
+        .ani-timer { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 1.2s; }
         .ani-message { opacity: 0; animation: fadeInUp 1s ease forwards; animation-delay: 1.8s; }
+        .ani-photo { opacity: 0; animation: fadeInUp 1.2s ease forwards; animation-delay: 2.2s; }
 
         h1 { color: #d63384; font-size: 1.8rem; margin-bottom: 5px; }
         .name { color: #ff4d6d; font-size: 2.5rem; font-weight: bold; margin-bottom: 10px; }
-        .start-date { font-size: 1rem; color: #777; margin-bottom: 20px; font-weight: bold; }
 
         .timer-container {
             display: grid;
@@ -116,17 +103,19 @@
             color: white;
             padding: 10px 5px;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .timer-box span { display: block; font-size: 1.3rem; font-weight: bold; }
-        .timer-label { font-size: 0.8rem; opacity: 0.9; }
+        .timer-label { font-size: 0.8rem; }
 
-        .message {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #444;
-            margin-top: 20px;
+        /* Photo Style */
+        .couple-photo {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            margin-top: 25px;
+            border: 5px solid #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
         .footer-heart { color: #ff4d6d; font-size: 40px; margin-top: 15px; animation: pulse 1.5s infinite; }
@@ -142,13 +131,11 @@
     <button class="open-btn" onclick="showMainContent()">ဖွင့်ကြည့်မယ်</button>
 </div>
 
-<div id="main-content" style="display: none;">
+<div id="main-content">
     <div class="container">
         <h1 class="ani-h1">Happy Anniversary</h1>
         <div class="name ani-name">ကောက်စိန်</div>
-        <div class="start-date">🗓️ ၂၀၂၆၊ မေလ (၁) ရက်</div>
-
-        <p>အကိုတို့နှစ်ယောက် လက်တွဲလာခဲ့တာ...</p>
+        <div style="font-weight: bold; color: #777;">🗓️ ၂၀၂၆၊ မေလ (၁) ရက်</div>
 
         <div class="timer-container ani-timer">
             <div class="timer-box"><span id="years">0</span><div class="timer-label">နှစ်</div></div>
@@ -162,6 +149,12 @@
         <div class="message ani-message">
             "မင်းနဲ့အတူ ဖြတ်သန်းရတဲ့ နေ့ရက်တိုင်းက ကိုယ့်အတွက်တော့ အရမ်းတန်ဖိုးရှိပါတယ်။ ရှေ့ဆက်မယ့် နှစ်ပေါင်းများစွာမှာလည်း အခုလိုပဲ အမြဲတမ်း အတူတူရှိနေပေးပါနော် <br> <b>အရမ်းချစ်တယ်ကောက်စိန်လေးရေ...</b>"
         </div>
+
+        <!-- ဒီနေရာမှာ ပုံထည့်ပေးရမှာပါ -->
+        <div class="ani-photo">
+            <img src="memory.jpg" alt="Our Memory" class="couple-photo">
+        </div>
+
         <div class="footer-heart">❤️</div>
     </div>
 </div>
@@ -172,13 +165,10 @@
     function showMainContent() {
         const giftScreen = document.getElementById('gift-screen');
         const mainContent = document.getElementById('main-content');
-        
         giftScreen.style.transform = 'translateY(-100%)';
-        
         setTimeout(() => {
             giftScreen.style.display = 'none';
             mainContent.style.display = 'flex';
-            // Scroll လုပ်လို့ရအောင် body overflow ကို ပြန်ဖွင့်ပေးခြင်း
             document.body.style.overflow = 'auto';
         }, 800);
     }
@@ -186,7 +176,6 @@
     function updateTimer() {
         const now = new Date();
         let diffTime = now - startDate;
-
         if (diffTime < 0) return;
 
         let years = now.getFullYear() - startDate.getFullYear();
@@ -198,7 +187,6 @@
             let lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
             days += lastMonth.getDate();
         }
-
         if (months < 0) {
             years -= 1;
             months += 12;
