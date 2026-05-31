@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="my">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>For My Kauk Sein ❤️</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pyidaungsu&display=swap');
 
-        body, html {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
             margin: 0;
             padding: 0;
             width: 100%;
             background: #ffe5ec;
             font-family: 'Pyidaungsu', sans-serif;
+            scroll-behavior: smooth;
         }
 
+        /* Gift screen */
         #gift-screen {
             position: fixed;
             top: 0;
@@ -37,8 +47,15 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         .open-btn {
@@ -51,158 +68,660 @@
             border-radius: 50px;
             cursor: pointer;
             font-family: 'Pyidaungsu', sans-serif;
+            transition: background 0.2s ease;
         }
 
+        .open-btn:hover {
+            background-color: #e6395c;
+        }
+
+        /* Main content wrapper */
         #main-content {
             display: none;
             min-height: 100vh;
             width: 100%;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
             background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-            padding: 40px 0;
+            padding: 30px 20px 60px;
             box-sizing: border-box;
         }
 
+        /* Base container for each section */
         .container {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 28px 22px;
+            border-radius: 40px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            border: 2px solid #ffffffcc;
+            backdrop-filter: blur(2px);
+            margin-bottom: 35px;
+            transition: transform 0.2s ease;
+        }
+
+        /* Special style for anniversary container (original) */
+        .main-anniversary {
+            margin-top: 10px;
+        }
+
+        /* 1 Month anniversary card – extra special */
+        .month-card {
+            background: linear-gradient(145deg, #fff9f9, #ffeef2);
+            border: 2px solid #ffb3c6;
+            box-shadow: 0 20px 30px rgba(255, 77, 109, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .month-card::before {
+            content: "✨";
+            font-size: 80px;
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .month-badge {
+            background: #ff4d6d;
+            color: white;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #d63384;
+            font-size: 1.9rem;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .month-name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .month-message {
+            background: #fff0f3;
+            padding: 18px;
             border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            max-width: 450px;
-            width: 90%;
-            border: 4px solid #fff;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #5a2e3a;
+            margin: 20px 0;
+            border-left: 5px solid #ff4d6d;
+            text-align: left;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .tiny-heart {
+            color: #ff4d6d;
+            animation: pulseHeart 1.2s infinite;
+            display: inline-block;
         }
 
-        .ani-h1 { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.3s; }
-        .ani-name { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 0.8s; }
-        .ani-timer { opacity: 0; animation: fadeInUp 0.8s ease forwards; animation-delay: 1.2s; }
-        .ani-message { opacity: 0; animation: fadeInUp 1s ease forwards; animation-delay: 1.8s; }
-        .ani-photo { opacity: 0; animation: fadeInUp 1.2s ease forwards; animation-delay: 2.2s; }
+        @keyframes pulseHeart {
 
-        h1 { color: #d63384; font-size: 1.8rem; margin-bottom: 5px; }
-        .name { color: #ff4d6d; font-size: 2.5rem; font-weight: bold; margin-bottom: 10px; }
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* timer styling */
+        h1 {
+            color: #d63384;
+            font-size: 1.9rem;
+            margin-bottom: 5px;
+        }
+
+        .name {
+            color: #ff4d6d;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
         .timer-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 12px;
             margin: 20px 0;
         }
 
         .timer-box {
             background: #ff4d6d;
             color: white;
-            padding: 10px 5px;
-            border-radius: 12px;
+            padding: 12px 6px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 0 #a1324b;
         }
 
-        .timer-box span { display: block; font-size: 1.3rem; font-weight: bold; }
-        .timer-label { font-size: 0.8rem; }
+        .timer-box span {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
 
-        /* Photo Style */
+        .timer-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .message {
+            background: #fce4ec;
+            padding: 18px;
+            border-radius: 28px;
+            margin: 20px 0;
+            font-size: 1rem;
+            line-height: 1.55;
+            color: #2d1b21;
+            text-align: center;
+            box-shadow: inset 0 0 0 1px #ffc0cb, 0 5px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Photo styling */
         .couple-photo {
             width: 100%;
-            max-width: 300px;
-            border-radius: 20px;
-            margin-top: 25px;
-            border: 5px solid #fff;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            max-width: 280px;
+            border-radius: 28px;
+            margin-top: 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+            object-fit: cover;
         }
 
-        .footer-heart { color: #ff4d6d; font-size: 40px; margin-top: 15px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .couple-photo:hover {
+            transform: scale(1.01);
+        }
 
+        .photo-caption {
+            font-size: 0.8rem;
+            color: #b34e6e;
+            margin-top: 8px;
+        }
+
+        .footer-heart {
+            color: #ff4d6d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 44px;
+            margin-top: 10px;
+            animation: pulse 1.5s infinite;
+            /* display: inline-block; */
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.12);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ani-h1,
+        .ani-name,
+        .ani-timer,
+        .ani-message,
+        .ani-photo,
+        .ani-month {
+            opacity: 0;
+        }
+
+        .ani-h1 {
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .ani-name {
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .ani-timer {
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        .ani-message {
+            animation: fadeInUp 0.9s ease forwards;
+            animation-delay: 1.2s;
+        }
+
+        .ani-photo {
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 1.6s;
+            display: flex;
+            justify-content: center;
+        }
+
+        .slideshow {
+            width: 300px;
+            /* adjust size */
+            height: 300px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: fade 12s infinite;
+        }
+
+        /* Delay each image */
+        .slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            animation-delay: 3s;
+        }
+
+        .slide:nth-child(3) {
+            animation-delay: 6s;
+        }
+
+        .slide:nth-child(4) {
+            animation-delay: 9s;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            35% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .ani-month {
+            animation: fadeInUp 0.9s ease forwards;
+            animation-delay: 2s;
+        }
+
+        /* responsiveness */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 16px;
+            }
+
+            .timer-box span {
+                font-size: 1.2rem;
+            }
+
+            .month-name {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        .divider-cute {
+            width: 70px;
+            height: 3px;
+            background: #ffb3c6;
+            margin: 15px auto;
+            border-radius: 3px;
+        }
+
+        button.scroll-tip {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-top: 5px;
+        }
     </style>
 </head>
+
 <body>
 
-<div id="gift-screen">
-    <div class="gift-box" onclick="showMainContent()">🎁</div>
-    <p style="color: white; font-size: 1.2rem; margin-top: 15px;">ကောက်စိန်လေးအတွက် လက်ဆောင်ရှိတယ်နော်...</p>
-    <button class="open-btn" onclick="showMainContent()">ဖွင့်ကြည့်မယ်</button>
-</div>
-
-<div id="main-content">
-    <div class="container">
-        <h1 class="ani-h1">Happy Anniversary</h1>
-        <div class="name ani-name">ကောက်စိန်</div>
-        <div style="font-weight: bold; color: #777;">🗓️ ၂၀၂၆၊ မေလ (၁) ရက်</div>
-
-        <div class="timer-container ani-timer">
-            <div class="timer-box"><span id="years">0</span><div class="timer-label">နှစ်</div></div>
-            <div class="timer-box"><span id="months">0</span><div class="timer-label">လ</div></div>
-            <div class="timer-box"><span id="days">0</span><div class="timer-label">ရက်</div></div>
-            <div class="timer-box"><span id="hours">0</span><div class="timer-label">နာရီ</div></div>
-            <div class="timer-box"><span id="minutes">0</span><div class="timer-label">မိနစ်</div></div>
-            <div class="timer-box"><span id="seconds">0</span><div class="timer-label">စက္ကန့်</div></div>
-        </div>
-
-        <div class="message ani-message">
-            "မင်းနဲ့အတူ ဖြတ်သန်းရတဲ့ နေ့ရက်တိုင်းက ကိုယ့်အတွက်တော့ အရမ်းတန်ဖိုးရှိပါတယ်။ ရှေ့ဆက်မယ့် နှစ်ပေါင်းများစွာမှာလည်း အခုလိုပဲ အမြဲတမ်း အတူတူရှိနေပေးပါနော် <br> <b>အရမ်းချစ်တယ်ကောက်စိန်လေးရေ...</b>"
-        </div>
-
-        <!-- ဒီနေရာမှာ ပုံထည့်ပေးရမှာပါ -->
-        <div class="ani-photo">
-            <img src="memory.jpg" alt="Our Memory" class="couple-photo">
-        </div>
-
-        <div class="footer-heart">❤️</div>
+    <div id="gift-screen">
+        <div class="gift-box" onclick="showMainContent()">🎁</div>
+        <p style="color: white; font-size: 1.2rem; margin-top: 15px; font-weight:500;">ကောက်စိန်လေးအတွက်
+            လက်ဆောင်ရှိတယ်နော်...</p>
+        <button class="open-btn" onclick="showMainContent()">ဖွင့်ကြည့်မယ်</button>
     </div>
-</div>
 
-<script>
-    const startDate = new Date("May 1, 2026 00:00:00");
+    <div id="main-content">
+        <!-- ORIGINAL ANNIVERSARY SECTION (main event) -->
+        <div class="container main-anniversary">
+            <h1 class="ani-h1">✨ Happy Anniversary ✨</h1>
+            <div class="name ani-name">ကောက်စိန်</div>
+            <div style="font-weight: bold; color: #aa4c6e; margin-bottom: 8px;">🗓️ ၂၀၂၆၊ မေလ (၁) ရက်</div>
 
-    function showMainContent() {
-        const giftScreen = document.getElementById('gift-screen');
-        const mainContent = document.getElementById('main-content');
-        giftScreen.style.transform = 'translateY(-100%)';
-        setTimeout(() => {
-            giftScreen.style.display = 'none';
-            mainContent.style.display = 'flex';
-            document.body.style.overflow = 'auto';
-        }, 800);
-    }
+            <div class="timer-container ani-timer">
+                <div class="timer-box"><span id="years">0</span>
+                    <div class="timer-label">နှစ်</div>
+                </div>
+                <div class="timer-box"><span id="months">0</span>
+                    <div class="timer-label">လ</div>
+                </div>
+                <div class="timer-box"><span id="days">0</span>
+                    <div class="timer-label">ရက်</div>
+                </div>
+                <div class="timer-box"><span id="hours">0</span>
+                    <div class="timer-label">နာရီ</div>
+                </div>
+                <div class="timer-box"><span id="minutes">0</span>
+                    <div class="timer-label">မိနစ်</div>
+                </div>
+                <div class="timer-box"><span id="seconds">0</span>
+                    <div class="timer-label">စက္ကန့်</div>
+                </div>
+            </div>
 
-    function updateTimer() {
-        const now = new Date();
-        let diffTime = now - startDate;
-        if (diffTime < 0) return;
+            <div class="message ani-message">
+                💖 "ကောက်စိန်လေးနဲ့အတူ ဖြတ်သန်းနေရတဲ့ နေ့ရက်တိုင်းက ကိုကို့အတွက်တော့ အရမ်းတန်ဖိုးရှိပါတယ်ဗျာ။
+                ရှေ့ဆက်မယ့် နှစ်ပေါင်းများစွာမှာလည်း အခုလိုပဲ အမြဲတမ်း အတူတူရှိနေပေးပါနော် <br>
+                <b>အရမ်းချစ်ရပါတယ်ကောက်စိန်လေးရေ...</b> 💕"
+            </div>
 
-        let years = now.getFullYear() - startDate.getFullYear();
-        let months = now.getMonth() - startDate.getMonth();
-        let days = now.getDate() - startDate.getDate();
+            <div class="ani-photo">
+                <img src="memory.jpg" alt="Our Memory" class="couple-photo">
+            </div><br>
 
-        if (days < 0) {
-            months -= 1;
-            let lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-            days += lastMonth.getDate();
+            <div class="slideshow">
+                <img src="1.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="2.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="3.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="4.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="5.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="6.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="7.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="8.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="9.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="10.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+            </div><br>
+            <div class="slideshow">
+                <img src="11.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="12.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="13.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="14.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="15.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="16.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="17.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="18.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="19.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="20.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+            </div><br>
+            <div class="slideshow">
+                <img src="21.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="22.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="23.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="24.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="25.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="26.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="27.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="28.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="29.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="30.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+            </div><br>
+            <div class="slideshow">
+                <img src="31.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="32.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="33.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="34.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="35.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="36.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="37.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="38.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="39.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+                <img src="40.jpg" alt="Our Memory" class="slide" style="background: #ffe0e6;">
+            </div><br>
+            <div class="footer-heart">❤️</div>
+        </div>
+
+        <!-- ✨ NEW: 1 MONTH ANNIVERSARY SPECIAL SECTION ✨ -->
+        <div class="container month-card ani-month">
+            <div class="month-badge">1 Month</div>
+            <h2 class="text-center">🎉 Happy 1 Month Anniversary 🎉</h2>
+            <div class="month-name">
+                ❤️❤️❤️❤️❤️❤️❤️
+            </div>
+            <div class="divider-cute"></div>
+
+            <!-- 1 month countup (from same start date: May 1, 2026) -->
+            <div class="timer-container" style="grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 10px;">
+                <div class="timer-box" style="background: #d45a7a;"><span id="monthTotal">0</span>
+                    <div class="timer-label">လ ပြည့်</div>
+                </div>
+                <div class="timer-box" style="background: #d45a7a;"><span id="daysInMonth">0</span>
+                    <div class="timer-label">ရက်မြောက်</div>
+                </div>
+            </div>
+
+            <div class="month-message">
+                🌸 <strong>ကိုကို့ရဲ့ အာပူကြုးလေးရေ...</strong> 🌸<br><br>
+                ✨ <strong>အများကြီးအများကြီး ချစ်ရပါတယ်ဗျ။ ကိုကို့ကိုဒီထက်ပိုပိုပြီး ချစ်ပေးပါနော်။</strong> <br>
+                ကောက်စိန်လေးနဲ့ အတူတူမက်ထားတဲ့ အိပ်မက်တွေကို အတူတူ အကောင်အထည်ဖော်သွားကြမယ်နော်။<br>
+                ၁ လပြည့် Aniversary ကနေ တစ်နှစ်ပြည့်၊ နှစ်နှစ်ပြည့်၊ နှစ်ပတ်လည်နေ့တွေအများကြီးကို ကျော်ဖြတ်ပြီး အမြဲတမ်းအတွက် အတူတူချစ်သွားကြပါမယ်နော်။ 💫
+                <div style="margin-top: 15px;"><span class="tiny-heart">❤️❤️❤️</span> Forever yours <span
+                        class="tiny-heart">❤️❤️❤️</span></div>
+            </div>
+
+            <!-- Special small note: 1 month anniversary memory -->
+            <div
+                style="background: #fff0f3; border-radius: 28px; padding: 10px 16px; text-align: center; margin-top: 12px;">
+                <span style="font-size: 1rem;">💌 “လတိုင်း၊ နှစ်တိုင်း၊ အချိန်တိုင်း အမြဲတမ်း ချစ်သွားချင်ပါတယ်ဗျာ” 💌</span>
+            </div>
+
+            <!-- additional tiny deco -->
+            <div class="footer-heart" style="font-size: 32px; margin-top: 20px;">❤️ 1️⃣ Month 💖</div>
+        </div>
+
+        <!-- Small quote closure -->
+        <div style="text-align: center; max-width: 480px; margin: 10px auto 10px;">
+            <p style="background: rgba(255,255,220,0.5); padding: 8px 16px; border-radius: 60px; font-size: 0.9rem;">✨
+                ကိုကို့အာပူကြုးလေးရဲ့အချစ်အတွက် အများကြီးကျေးဇူးတင်ပါတယ်နော် ✨</p>
+        </div>
+    </div>
+
+    <script>
+        // Anniversary start: May 1, 2026
+        const startDate = new Date("May 1, 2026 00:00:00");
+
+        // Helper: ensure valid date
+        function showMainContent() {
+            const giftScreen = document.getElementById('gift-screen');
+            const mainContent = document.getElementById('main-content');
+            if (giftScreen && mainContent) {
+                giftScreen.style.transform = 'translateY(-100%)';
+                setTimeout(() => {
+                    giftScreen.style.display = 'none';
+                    mainContent.style.display = 'flex';
+                    document.body.style.overflow = 'auto';
+                    // Trigger any extra love
+                    updateAllTimers();
+                }, 800);
+            }
         }
-        if (months < 0) {
-            years -= 1;
-            months += 12;
+
+        // Update both anniversary timer + 1 month anniversary special counters
+        function updateAllTimers() {
+            const now = new Date();
+            let diffTime = now - startDate;
+            if (diffTime < 0) {
+                // In case date is not reached yet, show zeros but we can still show minimal
+                document.getElementById("years").innerText = "0";
+                document.getElementById("months").innerText = "0";
+                document.getElementById("days").innerText = "0";
+                document.getElementById("hours").innerText = "0";
+                document.getElementById("minutes").innerText = "0";
+                document.getElementById("seconds").innerText = "0";
+                document.getElementById("monthTotal").innerText = "0";
+                document.getElementById("daysInMonth").innerText = "0";
+                return;
+            }
+
+            // --- MAIN ANNIVERSARY TIMER (years, months, days diff) ---
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+
+            if (days < 0) {
+                months -= 1;
+                let lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+            if (months < 0) {
+                years -= 1;
+                months += 12;
+            }
+
+            // Hours, minutes, seconds of current day (since start time doesn't matter for hours count, showing current clock)
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            document.getElementById("years").innerText = years;
+            document.getElementById("months").innerText = months;
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+
+            // --- 1 MONTH ANNIVERSARY SECTION: 
+            // Calculate total days passed since May 1, 2026, then represent as completed months and extra days.
+            // Because we want to celebrate "1 month completed" after 30 days or exact monthly cycle?
+            // For romantic feeling, we show total complete months (based on calendar months difference, but more meaningful)
+            // Actually 1 month anniversary means after 1 month from start date. 
+            // Using same startDate, we compute total months difference (rounded down) & remainder days.
+            let totalMonthsDiff = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+            let dayOfMonth = now.getDate();
+            let startDay = startDate.getDate();
+            let extraDays = dayOfMonth - startDay;
+
+            if (extraDays < 0) {
+                totalMonthsDiff -= 1;
+                let prevMonthDate = new Date(now.getFullYear(), now.getMonth(), 0);
+                extraDays += prevMonthDate.getDate();
+            }
+            // Ensure it's not negative
+            if (totalMonthsDiff < 0) totalMonthsDiff = 0;
+            if (extraDays < 0) extraDays = 0;
+
+            // For 1 month special, we show completed month count (like 1 month, 2 months..). But since it's 1 month anniversary, we show at least 1 if > 30 days.
+            // Make it cute: if totalMonthsDiff >= 1 → show that, else if days passed >= 30, we manually detect 1 month.
+            let totalDaysPassed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+            let displayMonthCount = totalMonthsDiff;
+            let displayExtraDays = extraDays;
+
+            // Special logic: if totalDaysPassed >= 30 and displayMonthCount === 0, treat as 1 month exactly (for 30-59 days)
+            if (totalDaysPassed >= 30 && displayMonthCount === 0) {
+                displayMonthCount = 1;
+                displayExtraDays = totalDaysPassed - 30;
+                if (displayExtraDays < 0) displayExtraDays = 0;
+            }
+            // If displayMonthCount > 0, ensure extra days calculated relative to the month edge
+            if (displayMonthCount > 0 && totalMonthsDiff === 0 && totalDaysPassed >= 30) {
+                // recalc extra days more naturally
+                let refDate = new Date(startDate);
+                refDate.setMonth(startDate.getMonth() + 1);
+                let daysIntoSecondMonth = Math.max(0, Math.floor((now - refDate) / (1000 * 3600 * 24)));
+                if (daysIntoSecondMonth >= 0 && daysIntoSecondMonth < 31) {
+                    displayExtraDays = daysIntoSecondMonth;
+                } else {
+                    displayExtraDays = extraDays;
+                }
+            }
+
+            // Edge for exact 1 month: show 1 month 0 days
+            if (totalDaysPassed >= 30 && totalDaysPassed < 60 && displayMonthCount === 1 && displayExtraDays < 0) displayExtraDays = 0;
+
+            document.getElementById("monthTotal").innerText = displayMonthCount;
+            document.getElementById("daysInMonth").innerText = displayExtraDays;
+
+            // additional fine tune: if totalDaysPassed < 30 then monthTotal = 0, daysInMonth = totalDaysPassed
+            if (totalDaysPassed < 30) {
+                document.getElementById("monthTotal").innerText = "0";
+                document.getElementById("daysInMonth").innerText = totalDaysPassed;
+            }
+            // For '1 month' highlight when exactly at 30 days or more
+            if (totalDaysPassed >= 30 && document.getElementById("monthTotal").innerText === "0") {
+                document.getElementById("monthTotal").innerText = "1";
+                let adjDays = totalDaysPassed - 30;
+                document.getElementById("daysInMonth").innerText = adjDays >= 0 ? adjDays : 0;
+            }
         }
 
-        document.getElementById("years").innerText = years;
-        document.getElementById("months").innerText = months;
-        document.getElementById("days").innerText = days;
-        document.getElementById("hours").innerText = now.getHours();
-        document.getElementById("minutes").innerText = now.getMinutes();
-        document.getElementById("seconds").innerText = now.getSeconds();
-    }
+        // 1 second interval
+        setInterval(() => {
+            updateAllTimers();
+        }, 1000);
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
-</script>
+        // initial call
+        updateAllTimers();
 
+        // For manual open, ensure timers update after gift screen gone
+        window.showMainContent = showMainContent;
+
+        // if main content somehow already visible (edge) ?
+        if (document.getElementById('main-content').style.display === 'flex') {
+            updateAllTimers();
+        }
+
+        // Preload cute console message
+        console.log("%c💖 Happy 1 Month & Forever Anniversary, Kauk Sein! 💖", "color:#ff4d6d; font-size:16px; font-weight:bold;");
+    </script>
 </body>
+
 </html>
